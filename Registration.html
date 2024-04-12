@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Registration Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="nav_footer.css">
+</head>
+
+<body>
+  <header>
+    <h1>Jindal Hospital</h1>
+  </header>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="Cardiology.html">CARDIOLOGY</a>
+    <a href="Dermatology.html">DERMATOLOGY</a>
+    <a href="ENT.html">ENT</a>
+    <a href="Gynecology.html">GYNECOLOGY</a>
+    <a href="Neurology.html">NEUROLOGY</a>
+    <a href="Trasplantation.html">TRANSPLANTATION</a>
+    <a href="Urology.html">UROLOGY</a>
+  </div>
+  <nav class="navBar">
+    <div class="navBarLeft">
+      <button id="main" class="openbtn" onclick="openNav()">☰</button> 
+      <a class= "navBarItem" href="home.html">Home</a>
+      <a class= "navBarItem" href="About.html">About Us</a> 
+      <a class= "navBarItem" href="APPOINTMENT.html">Appointment</a> 
+      <a class= "navBarItem" href="Registration.html">Patient Registration</a> 
+      <a class= "navBarItem" href="Report.html">Reports</a> 
+      <a class= "navBarItem" href="Cost.html">Cost</a>
+      <a class= "navBarItem" href="#contact">Contact</a>
+    </div>
+    <div class="navBarRight">
+      <a class= "navBarItem" href="Login.html">Login</a> 
+    </div>
+  </nav>
+  <div class="container">
+    <h2>PATIENT REGISTRATION FORM</h2>
+    <form id="registrationForm" action="#" method="POST" onsubmit="return validateForm()">
+      <label for="name">Patient's Name:</label>
+      <input type="text" id="name" name="name" required>
+      <small id="nameError" style="color: red;"></small>
+
+      <label for="DOB">Date of birth:</label>
+      <input type="date" id="date" name="date" required>
+      <small id="dateError" style="color: red;"></small>
+
+      <label for="SEX">Patient's Gender:</label>
+      <select id="sex" name="sex" required>
+        <option value="FEMALE">FEMALE</option>
+        <option value="MALE">MALE</option>
+        <option value="OTHERS">OTHERS</option>
+      </select>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <small id="emailError" style="color: red;"></small>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required>
+      <small id="phoneError" style="color: red;"></small>
+
+      <label for="address">Enter your address:</label>
+      <input type="text" id="address" name="address" placeholder="Enter your full address" required>
+      <small id="addressError" style="color: red;"></small>
+
+      <label for="reason">Medical history(Brief):</label>
+      <textarea id="reason" name="reason" rows="4" required></textarea>
+
+      <button class="button" type="submit">Register</button>
+    </form>
+  </div>
+  <footer id="contact">
+    <table>
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Jindal Hospital<br>
+            Address Line 1<br>
+            Address Line 2
+          </td>
+          <td>
+            If you have any questions, feel free to contact us:<br>
+            Phone: +91 1234567890<br>
+            Email: info@jindalhospital.com
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </div>
+  <p>&copy; 2024 Jindal Hospital. All rights reserved.</p>
+</footer>
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
+
+function validateForm() {
+  var name = document.getElementById("name").value.trim();
+  var email = document.getElementById("email").value.trim();
+  var phone = document.getElementById("phone").value.trim();
+  var address = document.getElementById("address").value.trim();
+  var dob = new Date(document.getElementById("date").value);
+
+  var nameError = document.getElementById("nameError");
+  var emailError = document.getElementById("emailError");
+  var phoneError = document.getElementById("phoneError");
+  var addressError = document.getElementById("addressError");
+  var dateError = document.getElementById("dateError");
+
+  nameError.textContent = "";
+  emailError.textContent = "";
+  phoneError.textContent = "";
+  addressError.textContent = "";
+  dateError.textContent = "";
+
+  if (!/^[a-zA-Z ]+$/.test(name)) {
+    nameError.textContent = "Name can only contain letters and spaces";
+    return false;
+  }
+
+  if (!/\S+@\S+\.\S+/.test(email)) {
+    emailError.textContent = "Invalid email address";
+    return false;
+  }
+
+  if (!/^\d{10}$/.test(phone)) {
+    phoneError.textContent = "Phone number must be 10 digits long";
+    return false;
+  }
+
+  if (/^[a-zA-Z0-9\s\,\.\-]*$/.test(address) === false) {
+    addressError.textContent = "Address can contain only letters, numbers, spaces, commas, periods, and hyphens.";
+    return false;
+  }
+
+  if (dob >= new Date()) {
+    dateError.textContent = "Date of birth cannot be in the future";
+    return false;
+  }
+
+  return true;
+}
+</script>
+</body>
+</html>

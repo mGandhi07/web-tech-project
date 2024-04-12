@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointment Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="nav_footer.css">
+</head>
+
+<body>
+  <header>
+    <h1>Jindal Hospital</h1>
+  </header>
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="Cardiology.html">CARDIOLOGY</a>
+    <a href="Dermatology.html">DERMATOLOGY</a>
+    <a href="ENT.html">ENT</a>
+    <a href="Gynecology.html">GYNECOLOGY</a>
+    <a href="Neurology.html">NEUROLOGY</a>
+    <a href="Trasplantation.html">TRANSPLANTATION</a>
+    <a href="Urology.html">UROLOGY</a>
+  </div>
+  <nav class="navBar">
+    <div class="navBarLeft">
+      <button id="main" class="openbtn" onclick="openNav()">☰</button> 
+      <a class= "navBarItem" href="home.html">Home</a>
+      <a class= "navBarItem" href="About.html">About Us</a> 
+      <a class= "navBarItem" href="APPOINTMENT.html">Appointment</a> 
+      <a class= "navBarItem" href="Registration.html">Patient Registration</a> 
+      <a class= "navBarItem" href="Report.html">Reports</a> 
+      <a class= "navBarItem" href="Cost.html">Cost</a>
+      <a class= "navBarItem" href="#contact">Contact</a>
+    </div>
+    <div class="navBarRight">
+      <a class= "navBarItem" href="Login.html">Login</a> 
+    </div>
+  </nav>
+  <div class="container">
+    <h2>APPOINTMENT FORM</h2>
+    <form id="appointmentForm" action="#" method="POST">
+      <label for="name">Patient's Name:</label>
+      <input type="text" id="name" name="name" required>
+      <small id="nameError" style="color: red;"></small>
+
+      <label for="SEX">Patient's SEX:</label>
+      <SELECT type="text" id="sex" name="sex" required>
+        <option value="FEMALE">FEMALE </option>
+        <option value="MALE">MALE</option>
+        <option value="OTHERS">OTHERS</option>
+      </SELECT>
+
+      <label for="aGE">Patient's AGE:</label>
+      <input type="number" id="age" name="age" min="0" max="999" required>
+      <small id="ageError" style="color: red;"></small>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required>
+      <small id="phoneError" style="color: red;"></small>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="date">Preferred Date:</label>
+      <input type="date" id="date" name="date" required>
+      <small id="dateError" style="color: red;"></small>
+
+      <label for="time">Preferred Time:</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="Department">Select Department:</label>
+      <select id="Department" name="Department" required>
+        <option value="" disabled selected>Select Department</option>
+        <option value="EMERH">EMERGENCY ONLY</option>
+        <option value="NEUROLOGY">NEUROLOGY</option>
+        <option value="PSYCHIATRY">PSYCHIATRY </option>
+        <option value="CARDIOLOGY">CARDIOLOGY</option>
+        <option value="ONCOLOGY">ONCOLOGY</option>
+        <option value="GYNAECOLOGY">GYNAECOLOGY</option>
+        <option value="DERMETAOLOGY">DERMETAOLOGY</option>
+      </select>
+
+      <label for="doctor">Select Doctor:</label>
+      <select id="doctor" name="doctor" required>
+        <option value="" disabled selected>Select Doctor</option>
+        <option value="Dr. BRIJANSHI RASTOGI">Dr.BRIJANSHI RASTOGI</option>
+        <option value="Dr. PALLAVI KATHAIT">Dr.PALLAVI KATHAIT</option>
+        <option value="Dr. YOGESH JAIN">Dr.YOGESH JAIN</option>
+        <option value="Dr. MANYA GANDHIN">Dr. MANYA GANDHIN</option>
+        <option value="Dr. PRIYANSHU DUBEY">Dr.PRIYANSHU DUBEY</option>
+        <option value="Dr. KUSHAGRA BHARDWAJ">Dr.KUSHAGRA BHARDWAJ</option>
+      </select>
+
+      <label for="reason">Reason for Appointment:</label>
+      <textarea id="reason" name="reason" rows="4" required></textarea>
+
+      <label for="notes">Additional Notes:</label>
+      <textarea id="notes" name="notes" rows="4"></textarea>
+
+      <button class="button" type="submit">Submit</button>
+    </form>
+  </div>
+  <footer id="contact">
+    <table>
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            Jindal Hospital<br>
+            Address Line 1<br>
+            Address Line 2
+          </td>
+          <td>
+            If you have any questions, feel free to contact us:<br>
+            Phone: +91 1234567890<br>
+            Email: info@jindalhospital.com
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </div>
+  <p>&copy; 2024 Jindal Hospital. All rights reserved.</p>
+</footer>
+<script>
+document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+  // Prevent form submission
+  event.preventDefault();
+  
+  // Perform validation
+  var name = document.getElementById("name").value.trim();
+  var age = document.getElementById("age").value.trim();
+  var phone = document.getElementById("phone").value.trim();
+  var date = new Date(document.getElementById("date").value);
+
+  var nameError = document.getElementById("nameError");
+  var ageError = document.getElementById("ageError");
+  var phoneError = document.getElementById("phoneError");
+  var dateError = document.getElementById("dateError");
+
+  // Reset errors
+  nameError.textContent = "";
+  ageError.textContent = "";
+  phoneError.textContent = "";
+  dateError.textContent = "";
+
+  // Validate name
+  if (!/^[a-zA-Z ]+$/.test(name)) {
+    nameError.textContent = "Name can only contain letters and spaces";
+    return false;
+  }
+
+  // Validate age
+  if (isNaN(age) || age < 0 || age > 999) {
+    ageError.textContent = "Age must be a number between 0 and 999";
+    return false;
+  }
+
+  // Validate phone
+  if (!/^[0-9]{10}$/.test(phone)) {
+    phoneError.textContent = "Phone number must be 10 digits long";
+    return false;
+  }
+
+  // Validate date
+  if (date < new Date()) {
+    dateError.textContent = "Preferred date cannot be in the past";
+    return false;
+  }
+
+  // If all validation passes, you can submit the form
+  // You may add code here to submit the form data to the server
+});
+</script>
+</body>
+</html>

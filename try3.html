@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="costCalculatorApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cost Calculator</title>
+  <!-- Include AngularJS library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="CostCalculatorController">
+  <h2>Cost Calculator</h2>
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" ng-model="quantity" ng-change="calculateTotal()" min="0">
+
+  <label for="price">Price per unit:</label>
+  <input type="number" id="price" ng-model="price" ng-change="calculateTotal()" min="0">
+
+  <label for="discount">Discount (%):</label>
+  <input type="number" id="discount" ng-model="discount" ng-change="calculateTotal()" min="0" max="100">
+
+  <hr>
+
+  <p>Total Cost: {{ totalCost | currency }}</p>
+  
+  <script>
+    angular.module('costCalculatorApp', [])
+      .controller('CostCalculatorController', function($scope) {
+        $scope.quantity = 0;
+        $scope.price = 0;
+        $scope.discount = 0;
+        $scope.totalCost = 0;
+
+        $scope.calculateTotal = function() {
+          // Calculate total cost
+          var subtotal = $scope.quantity * $scope.price;
+          var discountAmount = (subtotal * $scope.discount) / 100;
+          $scope.totalCost = subtotal - discountAmount;
+        };
+      });
+  </script>
+</body>
+</html>
